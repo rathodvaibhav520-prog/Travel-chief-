@@ -1,0 +1,10 @@
+travel_chief/
+├── app.py                  # Flask Application & SQLite Database Handlers
+├── schema.sql              # Database Schema & Initial Seed Data
+├── static/
+│   ├── css/
+│   │   └── styles.css      # Luxury Theme Styles, Glassmorphism & Animations
+│   └── js/
+│       └── app.js          # SPA Controller, Multi-Step Wizard & UI Logic
+└── templates/
+    └── index.html          # Main Application Portal Template
