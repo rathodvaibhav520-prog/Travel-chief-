@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAVEL CHIEF — Luxury Travel Management</title>
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="bg-navy">
+
+    <!-- APP WRAPPER -->
+    <div class="app-container">
+        
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="sidebar" id="sidebar">
+            <div class="brand-header">
+                <div class="brand-logo">
+                    <i class="fa-solid@fa-compass gold-icon"></i>
+                    <span>TRAVEL CHIEF</span>
+                </div>
+                <small class="brand-tagline">PREMIUM CONCIERGE</small>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-link active" data-view="dashboard">
+                    <i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span>
+                </a>
+                <a href="#trips" class="nav-link" data-view="trips">
+                    <i class="fa-solid fa-plane-departure"></i> <span>My Trips</span>
+                </a>
+                <a href="#discover" class="nav-link" data-view="discover">
+                    <i class="fa-solid fa-earth-americas"></i> <span>Discover</span>
+                </a>
+                <a href="#itinerary" class="nav-link" data-view="itinerary">
+                    <i class="fa-solid fa-calendar-days"></i> <span>Itinerary</span>
+                </a>
+                <a href="#hotels" class="nav-link" data-view="hotels">
+                    <i class="fa-solid fa-hotel"></i> <span>Hotels</span>
+                </a>
+                <a href="#flights" class="nav-link" data-view="flights">
+                    <i class="fa-solid fa-plane"></i> <span>Flights</span>
+                </a>
+                <a href="#expenses" class="nav-link" data-view="expenses">
+                    <i class="fa-solid fa-wallet"></i> <span>Expenses</span>
+                </a>
+                <a href="#documents" class="nav-link" data-view="documents">
+                    <i class="fa-solid fa-vault"></i> <span>Documents</span>
+                </a>
+                <a href="#profile" class="nav-link" data-view="profile">
+                    <i class="fa-solid fa-user-gear"></i> <span>Profile</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-chip">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200" alt="Alex">
+                    <div class="user-info">
+                        <strong>Alex Morgan</strong>
+                        <span>First Class Member</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="main-wrapper">
+            
+            <!-- TOP BAR HEADER -->
+            <header class="topbar glass-header">
+                <div class="topbar-left">
+                    <button class="mobile-toggle" id="mobileMenuBtn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search luxury destinations, reservations, itineraries...">
+                    </div>
+                </div>
+
+                <div class="topbar-right">
+                    <button class="btn-icon" id="notifBtn">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="badge-dot"></span>
+                    </button>
+                    <button class="btn-gold" id="openCreateTripBtn">
+                        <i class="fa-solid fa-plus"></i> New Journey
+                    </button>
+                </div>
+            </header>
+
+            <!-- VIEW: DASHBOARD -->
+            <section class="view-panel active" id="view-dashboard">
+                <div class="hero-welcome">
+                    <div class="hero-text">
+                        <span class="champagne-badge"><i class="fa-solid fa-crown"></i> VIP PORTAL</span>
+                        <h1>Good morning, Alex 👋</h1>
+                        <p>You have an upcoming journey to <strong>Bali, Indonesia</strong> in 12 days.</p>
+                    </div>
+                </div>
+
+                <!-- METRICS GRID -->
+                <div class="metrics-grid">
+                    <div class="metric-card glass-card">
+                        <div class="card-icon gold-bg"><i class="fa-solid fa-suitcase"></i></div>
+                        <div class="card-data">
+                            <span>Total Trips</span>
+                            <h3 id="statTotalTrips">4 Active</h3>
+                        </div>
+                    </div>
+                    <div class="metric-card glass-card">
+                        <div class="card-icon teal-bg"><i class="fa-solid fa-vault"></i></div>
+                        <div class="card-data">
+                            <span>Total Travel Budget</span>
+                            <h3 id="statTotalBudget">$24,500</h3>
+                        </div>
+                    </div>
+                    <div class="metric-card glass-card">
+                        <div class="card-icon red-bg"><i class="fa-solid fa-credit-card"></i></div>
+                        <div class="card-data">
+                            <span>Total Expenses</span>
+                            <h3 id="statTotalExpenses">$8,950</h3>
+                        </div>
+                    </div>
+                    <div class="metric-card glass-card">
+                        <div class="card-icon green-bg"><i class="fa-solid fa-piggy-bank"></i></div>
+                        <div class="card-data">
+                            <span>Remaining Budget</span>
+                            <h3 id="statRemaining">$15,550</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DASHBOARD CONTENT SPLIT -->
+                <div class="dashboard-split">
+                    <!-- UPCOMING FEATURED TRIP -->
+                    <div class="trip-featured-card glass-card">
+                        <div class="featured-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80&w=1200" alt="Bali">
+                            <span class="status-tag">UPCOMING</span>
+                        </div>
+                        <div class="featured-body">
+                            <div class="flex-between">
+                                <h2>Bali Luxury Retreat</h2>
+                                <span class="gold-text-bold">$12,500</span>
+                            </div>
+                            <p class="muted-text"><i class="fa-solid fa-location-dot"></i> Bali, Indonesia • Oct 15 - Oct 25, 2026</p>
+                            <div class="progress-bar-container">
+                                <div class="progress-info">
+                                    <span>Budget Spent: $8,950</span>
+                                    <span>71.6%</span>
+                                </div>
+                                <div class="progress-track"><div class="progress-fill" style="width: 71.6%;"></div></div>
+                            </div>
+                            <div class="action-row">
+                                <button class="btn-outline" data-view="itinerary">View Itinerary</button>
+                                <button class="btn-gold-sm">Flight Status <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QUICK ITINERARY TIMELINE -->
+                    <div class="quick-itinerary glass-card">
+                        <h3><i class="fa-solid fa-clock-rotate-left gold-icon"></i> Upcoming Schedule</h3>
+                        <div class="timeline-compact">
+                            <div class="timeline-item">
+                                <div class="time-badge">10:30 AM</div>
+                                <div class="timeline-content">
+                                    <strong>Airport Transfer Pickup</strong>
+                                    <p>Private VIP Chauffeur Service</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time-badge">01:00 PM</div>
+                                <div class="timeline-content">
+                                    <strong>Resort Check-In</strong>
+                                    <p>Bvlgari Resort & Spa Bali</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="time-badge">07:30 PM</div>
+                                <div class="timeline-content">
+                                    <strong>Sunset Dinner</strong>
+                                    <p>Kisik Seafood & Grill Bar</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: MY TRIPS -->
+            <section class="view-panel" id="view-trips">
+                <div class="section-header">
+                    <div>
+                        <h2>My Luxury Journeys</h2>
+                        <p>Explore and manage all your curated travel experiences</p>
+                    </div>
+                    <div class="filter-controls">
+                        <select class="custom-select" id="filterStatus">
+                            <option value="all">All Trips</option>
+                            <option value="Upcoming">Upcoming</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="trips-grid" id="tripsGrid">
+                    <!-- Dynamic rendering via app.js -->
+                </div>
+            </section>
+
+            <!-- VIEW: ITINERARY -->
+            <section class="view-panel" id="view-itinerary">
+                <div class="section-header">
+                    <div>
+                        <h2>Detailed Daily Itinerary</h2>
+                        <p>Bali Luxury Retreat — Day-by-Day Schedule</p>
+                    </div>
+                </div>
+
+                <div class="itinerary-timeline-full">
+                    <div class="day-group">
+                        <div class="day-header">
+                            <span class="day-pill">DAY 01</span>
+                            <h3>Arrival & Relaxation in Bali</h3>
+                        </div>
+                        <div class="itinerary-cards">
+                            <div class="itinerary-card glass-card">
+                                <div class="it-time">10:30 AM</div>
+                                <div class="it-icon"><i class="fa-solid fa-car-side"></i></div>
+                                <div class="it-details">
+                                    <h4>Airport Pickup</h4>
+                                    <p>Private luxury SUV transfer directly to resort.</p>
+                                    <span class="location-tag"><i class="fa-solid fa-map-pin"></i> Ngurah Rai International</span>
+                                </div>
+                            </div>
+                            <div class="itinerary-card glass-card">
+                                <div class="it-time">01:00 PM</div>
+                                <div class="it-icon"><i class="fa-solid fa-hotel"></i></div>
+                                <div class="it-details">
+                                    <h4>Hotel Check-In</h4>
+                                    <p>Check-in at Bvlgari Resort Villa with ocean view.</p>
+                                    <span class="location-tag"><i class="fa-solid fa-map-pin"></i> Uluwatu, Bali</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="day-group">
+                        <div class="day-header">
+                            <span class="day-pill">DAY 02</span>
+                            <h3>Island Yacht Charter & Marine Life</h3>
+                        </div>
+                        <div class="itinerary-cards">
+                            <div class="itinerary-card glass-card">
+                                <div class="it-time">10:00 AM</div>
+                                <div class="it-icon"><i class="fa-solid fa-ship"></i></div>
+                                <div class="it-details">
+                                    <h4>Island Charter & Snorkeling</h4>
+                                    <p>Private catamaran tour around Nusa Penida.</p>
+                                    <span class="location-tag"><i class="fa-solid fa-map-pin"></i> Sanur Harbor</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: EXPENSES -->
+            <section class="view-panel" id="view-expenses">
+                <div class="section-header">
+                    <div>
+                        <h2>Travel Expense Intelligence</h2>
+                        <p>Real-time expenditure tracking and analytics</p>
+                    </div>
+                </div>
+
+                <div class="expense-split">
+                    <div class="glass-card expense-chart-card">
+                        <h3>Spending Breakdown</h3>
+                        <div class="breakdown-list" id="expenseBreakdownList">
+                            <!-- Dynamic Expense Categories -->
+                        </div>
+                    </div>
+                    <div class="glass-card recent-expenses-card">
+                        <h3>Recent Transactions</h3>
+                        <ul class="transaction-list" id="transactionList">
+                            <!-- Dynamic Transactions -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: DISCOVER -->
+            <section class="view-panel" id="view-discover">
+                <div class="section-header">
+                    <div>
+                        <h2>Curated Destinations</h2>
+                        <p>Handpicked luxury escapes around the globe</p>
+                    </div>
+                </div>
+                <div class="discover-grid">
+                    <div class="discover-card">
+                        <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&q=80&w=800" alt="Sydney">
+                        <div class="discover-overlay">
+                            <span>COASTAL ELEGANCE</span>
+                            <h3>Sydney, Australia</h3>
+                        </div>
+                    </div>
+                    <div class="discover-card">
+                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80&w=800" alt="Paris">
+                        <div class="discover-overlay">
+                            <span>ROMANTIC LUXURY</span>
+                            <h3>Paris, France</h3>
+                        </div>
+                    </div>
+                    <div class="discover-card">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=800" alt="Dubai">
+                        <div class="discover-overlay">
+                            <span>MODERN OPULENCE</span>
+                            <h3>Dubai, UAE</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: HOTELS -->
+            <section class="view-panel" id="view-hotels">
+                <div class="section-header">
+                    <h2>5-Star Accommodations</h2>
+                </div>
+                <div class="hotels-grid">
+                    <div class="hotel-card glass-card">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800" alt="Resort">
+                        <div class="hotel-body">
+                            <div class="flex-between">
+                                <h3>The Ritz-Carlton Bali</h3>
+                                <span class="rating-badge"><i class="fa-solid fa-star"></i> 4.9</span>
+                            </div>
+                            <p class="muted-text">Nusa Dua, Bali • Oceanfront Suite</p>
+                            <div class="price-row flex-between">
+                                <span class="price-tag">$750 <span>/ night</span></span>
+                                <button class="btn-gold-sm">Reserve</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: FLIGHTS -->
+            <section class="view-panel" id="view-flights">
+                <div class="section-header">
+                    <h2>Flight Management</h2>
+                </div>
+                <div class="flight-card glass-card">
+                    <div class="flight-header flex-between">
+                        <div class="airline-info">
+                            <i class="fa-solid fa-plane-up gold-icon"></i>
+                            <strong>Emirates Airlines (EK 398)</strong>
+                        </div>
+                        <span class="status-badge-green">CONFIRMED</span>
+                    </div>
+                    <div class="flight-route flex-between">
+                        <div class="route-point">
+                            <h3>DXB</h3>
+                            <span>Dubai Intl (Term 3)</span>
+                            <time>03:30 AM</time>
+                        </div>
+                        <div class="route-line">
+                            <i class="fa-solid fa-plane"></i>
+                            <span>9h 15m (Direct)</span>
+                        </div>
+                        <div class="route-point">
+                            <h3>DPS</h3>
+                            <span>Bali Ngurah Rai</span>
+                            <time>04:45 PM</time>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: DOCUMENTS -->
+            <section class="view-panel" id="view-documents">
+                <div class="section-header">
+                    <h2>Vault & Travel Documents</h2>
+                </div>
+                <div class="docs-grid">
+                    <div class="doc-card glass-card">
+                        <i class="fa-solid fa-passport gold-icon doc-icon"></i>
+                        <h4>Passport_AlexMorgan.pdf</h4>
+                        <p class="muted-text">Valid until: Nov 2030</p>
+                        <button class="btn-outline-sm"><i class="fa-solid fa-download"></i> Download</button>
+                    </div>
+                    <div class="doc-card glass-card">
+                        <i class="fa-solid fa-file-invoice gold-icon doc-icon"></i>
+                        <h4>Indonesia_E-Visa_2026.pdf</h4>
+                        <p class="muted-text">Valid until: Dec 2026</p>
+                        <button class="btn-outline-sm"><i class="fa-solid fa-download"></i> Download</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW: PROFILE -->
+            <section class="view-panel" id="view-profile">
+                <div class="profile-card glass-card">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300" class="profile-avatar" alt="Avatar">
+                    <h2>Alex Morgan</h2>
+                    <p class="muted-text">alex@travelchief.com • First Class VIP Traveler</p>
+                    <div class="profile-stats flex-between">
+                        <div><h3>18</h3><span>Countries Visited</span></div>
+                        <div><h3>42</h3><span>Trips Completed</span></div>
+                        <div><h3>120k</h3><span>Loyalty Points</span></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MULTI-STEP CREATE TRIP MODAL -->
+    <div class="modal-overlay" id="createTripModal">
+        <div class="modal-content glass-card">
+            <div class="modal-header flex-between">
+                <h3><i class="fa-solid fa-compass gold-icon"></i> Create Luxury Journey</h3>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+
+            <!-- STEP INDICATOR -->
+            <div class="wizard-steps">
+                <div class="step-dot active" data-step="1">1</div>
+                <div class="step-dot" data-step="2">2</div>
+                <div class="step-dot" data-step="3">3</div>
+            </div>
+
+            <form id="createTripForm">
+                <!-- STEP 1: DESTINATION -->
+                <div class="wizard-step-panel active" id="step-1">
+                    <h4>Step 1: Destination Details</h4>
+                    <div class="form-group">
+                        <label>Journey Title</label>
+                        <input type="text" id="inputTitle" placeholder="e.g. Swiss Alps Ski Vacation" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Destination City/Region</label>
+                        <input type="text" id="inputDestination" placeholder="e.g. Zurich" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Country</label>
+                        <input type="text" id="inputCountry" placeholder="e.g. Switzerland" required>
+                    </div>
+                </div>
+
+                <!-- STEP 2: DATES & TRAVELERS -->
+                <div class="wizard-step-panel" id="step-2">
+                    <h4>Step 2: Schedule & Guests</h4>
+                    <div class="form-group">
+                        <label>Start Date</label>
+                        <input type="date" id="inputStartDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>End Date</label>
+                        <input type="date" id="inputEndDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Travelers</label>
+                        <input type="number" id="inputTravelers" value="2" min="1" max="20" required>
+                    </div>
+                </div>
+
+                <!-- STEP 3: BUDGET & CONFIRM -->
+                <div class="wizard-step-panel" id="step-3">
+                    <h4>Step 3: Financial Allocation</h4>
+                    <div class="form-group">
+                        <label>Total Allocated Budget ($ USD)</label>
+                        <input type="number" id="inputBudget" value="10000" step="500" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cover Photo URL</label>
+                        <input type="url" id="inputCover" placeholder="https://images.unsplash.com/..." value="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80&w=1200">
+                    </div>
+                </div>
+
+                <div class="modal-footer flex-between">
+                    <button type="button" class="btn-outline" id="prevStepBtn" style="display:none;">Previous</button>
+                    <button type="button" class="btn-gold" id="nextStepBtn">Next Step</button>
+                    <button type="submit" class="btn-gold" id="submitTripBtn" style="display:none;">Create Trip</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
